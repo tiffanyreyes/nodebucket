@@ -1,0 +1,16 @@
+h1 {
+  font-size: 40px;
+  font-weight: 400;
+  padding: 1em;
+  text-decoration: underline;
+}
+
+p {
+  font-size: 22px;
+  font-weight: 400;
+  padding: 1em;
+}
+
+.banner {
+  text-align: center;
+}

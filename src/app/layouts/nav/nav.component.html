@@ -1,1 +1,15 @@
-<nav></nav>
+<mat-toolbar color="primary" class="toolbar" height="80">
+  <mat-toolbar-row>
+    <div class="logo">
+      <img src="assets/nodebucket.png" height="60"/>
+    </div>
+    <div style="width: 80%">
+      <div fxLayout="row wrap" fxLayoutAlign="end start">
+        <button mat-button routerLink="/">Home</button>
+        <button mat-button routerLink="/about">About</button>
+        <button mat-button routerLink="/contact-us">Contact Us</button>
+        <button mat-button routerLink="/sign-in">Sign In<mat-icon>account_circle</mat-icon></button>
+      </div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

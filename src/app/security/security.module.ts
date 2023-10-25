@@ -1,7 +1,7 @@
 /**
  * Title: security.module.ts
- * Author: Professor Krasso
- * Date: 8/5/23
+ * Author: Tiffany Reyes
+ * Date: 23 October 2023
 */
 
 // imports statements
