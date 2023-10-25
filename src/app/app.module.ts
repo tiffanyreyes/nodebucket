@@ -32,6 +32,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AboutComponent } from './about/about.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { SignInComponent } from './sign-in/sign-in.component';
     FooterComponent,
     AboutComponent,
     ContactUsComponent,
-    SignInComponent
+    SignInComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

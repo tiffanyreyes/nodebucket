@@ -8,12 +8,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SecurityComponent } from './security.component';
+import { signInGuard } from '../sign-in.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: SecurityComponent,
-    title: 'Nodebucket: Security'
+    title: 'Nodebucket: Security',
+    canActivate: [signInGuard]
   }
 ];
 

@@ -12,6 +12,8 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { signInGuard } from './sign-in.guard';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 // routes array with a path, component, and title for each route in the application (e.g. home, about, contact, etc.)
 const routes: Routes = [
@@ -41,13 +43,16 @@ const routes: Routes = [
       {
         path:'sign-in',
         component: SignInComponent
+      },
+      {
+        path: 'not-found',
+        component: NotFoundComponent
       }
     ]
   },
   {
-    // path for the security module (e.g. login, register, forgot password, etc.)
-    path: 'security',
-    loadChildren: () => import('./security/security.module').then(m => m.SecurityModule)
+    path:'**',
+    redirectTo: 'not-found'
   }
 ];
 
