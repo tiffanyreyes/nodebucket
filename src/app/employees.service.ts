@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class EmployeesService {
 
-  apiUrl = 'mongodb+srv://web450_admin:m3an@bellevueuniversity.paicaia.mongodb.net/';
+  apiUrl = '';
 
   employeeIds: Array<number> = [1007, 1008, 1009, 1010, 1011, 1012];
 
