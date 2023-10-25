@@ -25,7 +25,7 @@ export class SignInComponent implements OnInit {
     if (this.employeesService.validate(employeeId)) {
       this.cookieService.set('empId', employeeId.toString(), 1);
       this.cookieService.set('fullName', 'TEST FULL NAME', 1);
-      this.router.navigate(['/']);
+      this.router.navigate(['/tasks']);
     }
     else {
       this.errorMessage = 'Invalid sign-in.'

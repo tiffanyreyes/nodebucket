@@ -33,6 +33,9 @@ import { AboutComponent } from './about/about.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { AppLayoutComponent } from './layouts/app-layout/app-layout.component';
+import { ExternalNavComponent } from './layouts/external-nav/external-nav.component';
+import { TasksComponent } from './tasks/tasks.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ContactUsComponent,
     SignInComponent,
     NotFoundComponent,
+    AppLayoutComponent,
+    ExternalNavComponent,
+    TasksComponent
   ],
   imports: [
     BrowserModule,

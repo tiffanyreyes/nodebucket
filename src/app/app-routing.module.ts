@@ -14,6 +14,8 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { signInGuard } from './sign-in.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { AppLayoutComponent } from './layouts/app-layout/app-layout.component';
+import { TasksComponent } from './tasks/tasks.component';
 
 // routes array with a path, component, and title for each route in the application (e.g. home, about, contact, etc.)
 const routes: Routes = [
@@ -48,6 +50,17 @@ const routes: Routes = [
         path: 'not-found',
         component: NotFoundComponent
       }
+    ]
+  },
+  {
+    path: '',
+    component: AppLayoutComponent,
+    children: [
+      {
+        path: 'tasks',
+        component: TasksComponent,
+        canActivate: [signInGuard]
+      },
     ]
   },
   {
