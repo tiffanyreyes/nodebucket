@@ -37,22 +37,29 @@ const Employee = require('../models/employee');
  */
 router.get('/employees/:id', async(req, res) => {
   try {
-      Employee.findOne({'_id': req.params.id})
-          .then((employee) => {
-              console.log(employee);
-              res.json(employee);
-          })
-          .catch((err) => {
-              console.log(err);
-              res.status(404).send({
-                  'message': `Not Found`
-              });
+    Employee.findOne({'employeeId': req.params.id})
+      .then((employee) => {
+        if(!employee) {
+          console.log(`Employee with id ${req.params.id} Not Found`);
+          return res.status(404).send({
+            'message': 'Not Found'
           });
-  } catch (e) {
-      console.log(e);
-      res.status(500).send({
+        }
+        console.log(employee);
+        res.json(employee);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).send({
           'message': 'Internal Server Error'
+        });
       });
+  }
+  catch (e) {
+    console.log(e);
+    res.status(500).send({
+        'message': 'Internal Server Error'
+    });
   }
 });
 

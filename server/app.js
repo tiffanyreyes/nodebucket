@@ -7,6 +7,7 @@
 
 // Require statements
 const express = require('express')
+const http = require('http');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 // API Routes
@@ -22,8 +23,6 @@ const app = express()
 // Configure the app
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(express.static(path.join(__dirname, '../dist/nodebucket')))
-app.use('/', express.static(path.join(__dirname, '../dist/nodebucket')))
 
 const CONN = 'mongodb+srv://web450_admin:m3an@bellevueuniversity.paicaia.mongodb.net/web450DB'
 
@@ -71,4 +70,8 @@ app.use(function(err, req, res, next) {
   })
 })
 
-module.exports = app // export the Express application
+const PORT = process.env.PORT || 3000;
+const server = http.createServer(app);
+server.listen(PORT, () => {
+    console.log('Application started and listening on port 3000.')
+});
