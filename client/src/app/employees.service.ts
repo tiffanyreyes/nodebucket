@@ -7,14 +7,14 @@ import { Observable } from 'rxjs';
 })
 export class EmployeesService {
 
-  apiUrl = '';
+  apiUrl = 'http://localhost:3000/api';
 
   employeeIds: Array<number> = [1007, 1008, 1009, 1010, 1011, 1012];
 
   constructor(private http: HttpClient) { }
 
   findEmployeeById(id: string): Observable<any> {
-    return this.http.get<any>(`$[this.apiUrl]/employees/${id}`);
+    return this.http.get<any>(`${this.apiUrl}/employees/${id}`);
   }
 
   validate(employeeId: number) {

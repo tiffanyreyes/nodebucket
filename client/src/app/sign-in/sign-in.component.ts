@@ -21,15 +21,19 @@ export class SignInComponent implements OnInit {
   }
   onSubmit() {
     const formValues = this.signInForm.value;
-    const employeeId = parseInt(formValues.employeeId);
-    if (this.employeesService.validate(employeeId)) {
-      this.cookieService.set('empId', employeeId.toString(), 1);
-      this.cookieService.set('fullName', 'TEST FULL NAME', 1);
-      this.router.navigate(['/tasks']);
-    }
-    else {
-      this.errorMessage = 'Invalid sign-in.'
-    }
+    const employeeId = formValues.employeeId;
+    this.employeesService.findEmployeeById(employeeId)
+      .subscribe({
+        next: (res) => {
+          this.cookieService.set('empId', employeeId, 1);
+          this.cookieService.set('fullName', `${res.firstName} ${res.lastName}`, 1);
+          this.router.navigate(['/tasks']);
+        },
+        error:  (err) => {
+          console.error(err);
+          this.errorMessage = 'Invalid sign-in.'
+        }
+      });
   }
 
   get form() {

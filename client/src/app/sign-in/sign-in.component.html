@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-title class="header">Sign In</mat-card-title>
   <mat-card-content>
-    <form [formGroup]="signInForm" (ngSubmit)="onSubmit(); signInForm.reset()" >
+    <form [formGroup]="signInForm" (ngSubmit)="onSubmit()" >
       <div class="row justify-content-around">
         <mat-form-field class="col-12 col-md-4">
           <mat-label>Employee ID</mat-label>
@@ -9,7 +9,7 @@
         </mat-form-field>
       </div>
       <div class="row justify-content-around">
-        <button mat-raised-button class="col-12 col-md-4" color="primary" type="text" [disabled]="!signInForm.valid">Submit</button>
+        <button mat-raised-button class="col-12 col-md-4" color="primary" type="submit" [disabled]="!signInForm.valid">Submit</button>
       </div>
     </form>
     <div class="msg-error" *ngIf="errorMessage" style="color: #D8000C; background-color:#FFD2D2; padding: 12px; margin: 10px 0px">

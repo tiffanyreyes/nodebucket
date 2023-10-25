@@ -16,9 +16,11 @@ const EmployeeAPI = require('./routes/employee-routes');
 const mongoose = require('mongoose');
 const createServer = require('http-errors')
 const path = require('path')
+const cors = require('cors');
 
 // Create the Express app
 const app = express()
+app.use(cors());
 
 // Configure the app
 app.use(express.json())
@@ -68,7 +70,7 @@ app.use(function(err, req, res, next) {
     message: err.message,
     stack: req.app.get('env') === 'development' ? err.stack : undefined
   })
-})
+});
 
 const PORT = process.env.PORT || 3000;
 const server = http.createServer(app);
