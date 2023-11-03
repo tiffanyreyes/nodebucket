@@ -12,9 +12,13 @@ const Schema = mongoose.Schema;
 
 // A mongoose task schema
 
-export const taskSchema = new Schema({
+const taskSchema = new Schema({
     description: {
       type: String,
+      required: true
+    },
+    taskId: {
+      type: Number,
       required: true
     },
     employeeId: {

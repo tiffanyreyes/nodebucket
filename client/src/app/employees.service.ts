@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Employee } from './models/employee';
+import { Task } from './models/task';
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +11,13 @@ export class EmployeesService {
 
   apiUrl = 'http://localhost:3000/api';
 
-  employeeIds: Array<number> = [1007, 1008, 1009, 1010, 1011, 1012];
-
   constructor(private http: HttpClient) { }
 
-  findEmployeeById(id: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/employees/${id}`);
+  findEmployeeById(id: string): Observable<Employee> {
+    return this.http.get<Employee>(`${this.apiUrl}/employees/${id}`);
   }
 
-  validate(employeeId: number) {
-    return this.employeeIds.some(id => id ===employeeId);
+  findTasksByEmployeeId(id: string): Observable<Task[]> {
+    return this.http.get<Task[]>(`${this.apiUrl}/employees/${id}/tasks`);
   }
 }

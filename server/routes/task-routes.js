@@ -1,88 +1,26 @@
 /*
 ============================================
-; Title:  employee-routes.js
+; Title:  task-routes.js
 ; Author: Tiffany Reyes
-; Date:   25 October 2023
-; Description: Employee API routes
+; Date:   31 October 2023
+; Description: Task API routes
 ;===========================================
 */
 
 const express = require('express');
 const router = express.Router();
-const Employee = require('../models/employee');
 const Task = require('../models/task')
 const Counter = require('../models/counter')
 
 /**
- * findEmployeeById
- * @openapi
- * /api/employees/{id}:
- *   get:
- *     tags:
- *       - Employees
- *     description:  API for returning a employee document
- *     summary: returns a employee document
- *     parameters:
- *       - name: id
- *         in: path
- *         required: true
- *         description: Employee document id
- *         example: 1007
- *         schema:
- *           type: string
- *     responses:
- *       '200':
- *         description: Employee document
- *       '500':
- *         description: Internal Server Error
- *       '404':
- *         description: Not Found
- */
-router.get('/employees/:id', async(req, res) => {
-  try {
-    Employee.findOne({'employeeId': req.params.id})
-      .then((employee) => {
-        if(!employee) {
-          console.log(`Employee with id ${req.params.id} Not Found`);
-          return res.status(404).send({
-            'message': 'Not Found'
-          });
-        }
-        console.log(employee);
-        res.json(employee);
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(500).send({
-          'message': 'Internal Server Error'
-        });
-      });
-  }
-  catch (e) {
-    console.log(e);
-    res.status(500).send({
-        'message': 'Internal Server Error'
-    });
-  }
-});
-
-/**
  * findAllTasks
  * @openapi
- * /api/employees/{id}/tasks:
+ * /api/tasks:
  *   get:
  *     tags:
- *       - Employees
+ *       - Tasks
  *     description:  API for returning a task document
- *     summary: returns a list of task documents for an employee
- *     parameters:
- *       - name: id
- *         in: path
- *         required: true
- *         description: Employee document id
- *         example: 1007
- *         schema:
- *           type: string
+ *     summary: returns a list of task documents
  *     responses:
  *       '200':
  *         description: Task document
@@ -92,9 +30,9 @@ router.get('/employees/:id', async(req, res) => {
  *         description: Not Found
  */
 
-router.get('/employees/:id/tasks', async(req, res) => {
+router.get('/tasks', async(req, res) => {
     try { 
-        Task.find({employeeId: req.params.id})
+        Task.find({})
             .then((tasks) => {
                 console.log(tasks);
                 res.json(tasks);
@@ -117,21 +55,13 @@ router.get('/employees/:id/tasks', async(req, res) => {
 /**
  * createTask
  * @openapi
- * /api/employees/{id}/tasks:
+ * /api/tasks:
  *   post:
  *     tags:
- *       - Employees
+ *       - Tasks
  *     name: createTask
  *     description: API for adding a new task document to MongoDB Atlas
- *     summary: Creates a new task document for an employee
- *     parameters:
- *       - name: id
- *         in: path
- *         required: true
- *         description: Employee document id
- *         example: 1007
- *         schema:
- *           type: string
+ *     summary: Creates a new task document
  *     requestBody:
  *       description: Task information
  *       content:
@@ -153,11 +83,10 @@ router.get('/employees/:id/tasks', async(req, res) => {
  *         description: Not Found
  */
 
-router.post('/employees/:id/tasks', async(req, res) => {
+router.post('/tasks', async(req, res) => {
     try {
         const task = {
-            description: req.body.description,
-            employeeId: req.params.id
+            description: req.body.description
         }
         await Counter.findOneAndUpdate(
             {counterName: 'taskCounter'},
@@ -186,4 +115,14 @@ router.post('/employees/:id/tasks', async(req, res) => {
     }
 });
 
-module.exports = router;
+  module.exports = router;
+
+
+
+
+
+
+
+
+
+

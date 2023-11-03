@@ -1,10 +1,45 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { EmployeesService } from '../employees.service';
+import { CookieService } from 'ngx-cookie-service';
+import { Task } from '../models/task';
 
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
-  styleUrls: ['./tasks.component.css']
+  styleUrls: ['./tasks.component.css'],
 })
-export class TasksComponent {
 
+export class TasksComponent implements OnInit {
+  employeeName = '';
+
+  todo: Task[] = [];
+
+  done: Task[] = [];
+
+  constructor(private employeesService: EmployeesService, private cookieService: CookieService) {
+
+  }
+
+  ngOnInit(): void {
+    const employeeId = this.cookieService.get('empId');
+    this.employeeName = this.cookieService.get('fullName');
+    this.employeesService.findTasksByEmployeeId(employeeId)
+      .subscribe((res) => {
+        this.todo = res;
+      });
+  }
+
+  drop(event: CdkDragDrop<Task[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
+  }
 }

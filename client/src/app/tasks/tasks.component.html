@@ -1,1 +1,29 @@
-<p>tasks works!</p>
+<mat-card>
+  <h1>Welcome, {{ employeeName }}</h1>
+  <mat-card class="task-container">
+    <div class="row">
+      <div class="col text-center">
+        <h2>My Progress</h2>
+        <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <h2>To-Do List</h2>
+        <mat-card class="task-card">
+          <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]" class="example-list" (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let task of todo" cdkDrag>{{task.description}}</div>
+          </div>
+        </mat-card>
+      </div>
+      <div class="col-12 col-md-6">
+        <h2>Completed Tasks</h2>
+        <mat-card class="task-card">
+          <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList]" class="example-list" (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let task of done" cdkDrag>{{task.description}}</div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </mat-card>
+</mat-card>

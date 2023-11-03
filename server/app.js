@@ -12,6 +12,7 @@ const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 // API Routes
 const EmployeeAPI = require('./routes/employee-routes');
+const TaskAPI = require('./routes/task-routes');
 
 const mongoose = require('mongoose');
 const createServer = require('http-errors')
@@ -49,6 +50,7 @@ const openapiSpecification = swaggerJsdoc(options);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 app.use('/api', EmployeeAPI);
+app.use('/api', TaskAPI);
 
 app.get('', function(req, res) {
   res.redirect('/api-docs');
