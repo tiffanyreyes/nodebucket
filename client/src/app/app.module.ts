@@ -32,6 +32,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AboutComponent } from './about/about.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
@@ -40,6 +41,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AppLayoutComponent } from './layouts/app-layout/app-layout.component';
 import { ExternalNavComponent } from './layouts/external-nav/external-nav.component';
 import { TasksComponent } from './tasks/tasks.component';
+import { TaskDialogComponent } from './dialogs/task-dialog/task-dialog.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ import { TasksComponent } from './tasks/tasks.component';
     NotFoundComponent,
     AppLayoutComponent,
     ExternalNavComponent,
-    TasksComponent
+    TasksComponent,
+    TaskDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +78,8 @@ import { TasksComponent } from './tasks/tasks.component';
     HttpClientModule,
     MatGridListModule,
     DragDropModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

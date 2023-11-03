@@ -1,6 +1,7 @@
 <mat-card>
   <h1>Welcome, {{ employeeName }}</h1>
   <mat-card class="task-container">
+    <button mat-raised-button (click)="openTaskDialog()">Create Task</button>
     <div class="row">
       <div class="col text-center">
         <h2>My Progress</h2>

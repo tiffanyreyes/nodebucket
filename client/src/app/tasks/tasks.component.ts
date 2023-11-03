@@ -3,6 +3,8 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { EmployeesService } from '../employees.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Task } from '../models/task';
+import { MatDialog } from '@angular/material/dialog';
+import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.component';
 
 @Component({
   selector: 'app-tasks',
@@ -17,9 +19,10 @@ export class TasksComponent implements OnInit {
 
   done: Task[] = [];
 
-  constructor(private employeesService: EmployeesService, private cookieService: CookieService) {
-
-  }
+  constructor(
+    private employeesService: EmployeesService,
+    private cookieService: CookieService,
+    public dialog: MatDialog) {}
 
   ngOnInit(): void {
     const employeeId = this.cookieService.get('empId');
@@ -41,5 +44,11 @@ export class TasksComponent implements OnInit {
         event.currentIndex,
       );
     }
+  }
+
+  openTaskDialog() {
+    this.dialog.open(TaskDialogComponent, {
+      width: '500px'
+    });
   }
 }

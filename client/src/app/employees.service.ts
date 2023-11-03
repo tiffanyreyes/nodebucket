@@ -20,4 +20,8 @@ export class EmployeesService {
   findTasksByEmployeeId(id: string): Observable<Task[]> {
     return this.http.get<Task[]>(`${this.apiUrl}/employees/${id}/tasks`);
   }
+
+  createTaskByEmployeeId(id: string, task: Task): Observable<Task> {
+    return this.http.post<Task>(`${this.apiUrl}/employees/${id}/tasks`, task);
+  }
 }
