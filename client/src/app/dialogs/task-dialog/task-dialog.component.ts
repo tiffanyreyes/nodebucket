@@ -33,7 +33,7 @@ export class TaskDialogComponent implements OnInit {
 
     this.employeesService.createTaskByEmployeeId(employeeId, task)
       .subscribe((res) => {
-        this.dialogRef.close();
+        this.dialogRef.close(res);
       });
   }
 }

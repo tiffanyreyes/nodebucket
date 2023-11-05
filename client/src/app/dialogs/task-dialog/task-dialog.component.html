@@ -1,18 +1,15 @@
 <h1 mat-dialog-title>Create Task</h1>
 <div mat-dialog-content>
-  <form [formGroup]="createTaskForm" (ngSubmit)="onSubmit()" >
+  <form [formGroup]="createTaskForm">
     <div class="row">
       <mat-form-field class="col-12">
         <mat-label>Description</mat-label>
         <input matInput placeholder="Task Description" required formControlName="description">
       </mat-form-field>
     </div>
-    <div class="row justify-content-around">
-
-    </div>
   </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Return</button>
-  <button mat-raised-button color="primary" type="submit" [disabled]="!createTaskForm.valid">Create</button>
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-raised-button color="accent" (click)="onSubmit()" [disabled]="!createTaskForm.valid">Create</button>
 </div>

@@ -3,7 +3,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { EmployeesService } from '../employees.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Task } from '../models/task';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.component';
 
 @Component({
@@ -14,6 +14,8 @@ import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.componen
 
 export class TasksComponent implements OnInit {
   employeeName = '';
+  progress = 0;
+  dialogRef: MatDialogRef<TaskDialogComponent>;
 
   todo: Task[] = [];
 
@@ -30,6 +32,8 @@ export class TasksComponent implements OnInit {
     this.employeesService.findTasksByEmployeeId(employeeId)
       .subscribe((res) => {
         this.todo = res;
+
+        this.calculateProgress();
       });
   }
 
@@ -44,11 +48,25 @@ export class TasksComponent implements OnInit {
         event.currentIndex,
       );
     }
+
+    this.calculateProgress();
   }
 
   openTaskDialog() {
-    this.dialog.open(TaskDialogComponent, {
+    this.dialogRef = this.dialog.open(TaskDialogComponent, {
       width: '500px'
     });
+
+    this.dialogRef.afterClosed().subscribe(result => {
+      this.todo.push(result);
+    });
+  }
+
+  calculateProgress() {
+    if(this.todo.length + this.done.length === 0) {
+      return;
+    }
+
+    this.progress = (this.done.length/(this.todo.length + this.done.length)) * 100;
   }
 }
