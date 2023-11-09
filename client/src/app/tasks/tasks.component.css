@@ -9,10 +9,6 @@ h1 {
   padding: 2em;
 }
 
-/* button {
-  height: 200px;
-  width: 200px;
-} */
 
 .example-container {
   width: 400px;
@@ -67,4 +63,8 @@ h1 {
 
 .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.task-spacer {
+  flex: 1 1 auto;
 }

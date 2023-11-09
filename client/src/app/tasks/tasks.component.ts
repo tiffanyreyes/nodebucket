@@ -5,6 +5,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { Task } from '../models/task';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.component';
+import { TaskDeleteDialogComponent } from '../dialogs/task-delete-dialog/task-delete-dialog.component';
+import { TaskUpdateDialogComponent } from '../dialogs/task-update-dialog/task-update-dialog.component';
 
 @Component({
   selector: 'app-tasks',
@@ -14,8 +16,11 @@ import { TaskDialogComponent } from '../dialogs/task-dialog/task-dialog.componen
 
 export class TasksComponent implements OnInit {
   employeeName = '';
+  employeeId: string;
   progress = 0;
-  dialogRef: MatDialogRef<TaskDialogComponent>;
+  createDialogRef: MatDialogRef<TaskDialogComponent>;
+  deleteDialogRef: MatDialogRef<TaskDeleteDialogComponent>;
+  updateDialogRef: MatDialogRef<TaskUpdateDialogComponent>;
 
   todo: Task[] = [];
 
@@ -27,9 +32,9 @@ export class TasksComponent implements OnInit {
     public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    const employeeId = this.cookieService.get('empId');
+    this.employeeId = this.cookieService.get('empId');
     this.employeeName = this.cookieService.get('fullName');
-    this.employeesService.findTasksByEmployeeId(employeeId)
+    this.employeesService.findTasksByEmployeeId(this.employeeId)
       .subscribe((res) => {
         this.todo = res;
 
@@ -53,12 +58,14 @@ export class TasksComponent implements OnInit {
   }
 
   openTaskDialog() {
-    this.dialogRef = this.dialog.open(TaskDialogComponent, {
+    this.createDialogRef = this.dialog.open(TaskDialogComponent, {
       width: '500px'
     });
 
-    this.dialogRef.afterClosed().subscribe(result => {
-      this.todo.push(result);
+    this.createDialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.todo.push(result);
+      }
     });
   }
 
@@ -68,5 +75,33 @@ export class TasksComponent implements OnInit {
     }
 
     this.progress = (this.done.length/(this.todo.length + this.done.length)) * 100;
+  }
+
+  deleteTask(taskId: number) {
+    this.deleteDialogRef = this.dialog.open(TaskDeleteDialogComponent, {
+      data: { taskId },
+      width: '500px'
+    });
+
+    this.deleteDialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.todo = this.todo.filter(task => task.taskId !== taskId);
+      }
+    });
+  }
+
+  updateTask(task: Task) {
+    this.updateDialogRef = this.dialog.open(TaskUpdateDialogComponent, {
+      data: { task },
+      width: '500px'
+    });
+
+    this.updateDialogRef.afterClosed().subscribe((result: Task) => {
+      if (result) {
+        this.todo = this.todo.map(task => {
+          return task.taskId === result.taskId ? result : task;
+        });
+      }
+    });
   }
 }

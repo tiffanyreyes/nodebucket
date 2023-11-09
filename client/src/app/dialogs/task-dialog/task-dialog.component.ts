@@ -12,7 +12,6 @@ import { Task } from 'src/app/models/task';
 })
 export class TaskDialogComponent implements OnInit {
   createTaskForm: FormGroup;
-  errorMessage: string;
 
   constructor(
     private fb: FormBuilder,

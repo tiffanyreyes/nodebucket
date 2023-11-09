@@ -15,7 +15,16 @@
         <h2>To-Do List</h2>
         <mat-card class="task-card">
           <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]" class="example-list" (cdkDropListDropped)="drop($event)">
-            <div class="example-box" *ngFor="let task of todo" cdkDrag>{{task.description}}</div>
+            <div class="example-box" *ngFor="let task of todo" cdkDrag>
+              {{task.description}}
+              <span class="task-spacer"></span>
+              <button mat-icon-button color="warn" aria-label="delete button" (click)="deleteTask(task.taskId)">
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button mat-icon-button color="primary" aria-label="edit button" (click)="updateTask(task)">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
           </div>
         </mat-card>
       </div>

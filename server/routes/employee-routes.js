@@ -145,7 +145,7 @@ router.get('/employees/:id/tasks', async(req, res) => {
  *             example:
  *               description: Create button
  *     responses:
- *       '200':
+ *       '201':
  *         description: Task added
  *       '500':
  *         description: Internal Server Error
@@ -169,7 +169,7 @@ router.post('/employees/:id/tasks', async(req, res) => {
             await Task.create(task)
             .then((task) => {
                 console.log(task);
-                res.json(task);
+                res.status(201).json(task);
             })
             .catch((err) => {
                 console.log(err);
@@ -184,6 +184,134 @@ router.post('/employees/:id/tasks', async(req, res) => {
             'message': `Internal Server Error: ${e.message}`
         });
     }
+});
+
+/**
+ * updateTask
+ * @openapi
+ * /api/employees/{id}/tasks/{taskId}:
+ *   put:
+ *     tags:
+ *       - Employees
+ *     name: updateTask
+ *     description: API for updating a task document by id to MongoDB Atlas
+ *     summary: Updates a task document
+ *     parameters: 
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: Employee document id
+ *         example: 1007
+ *         schema:
+ *           type: string
+ *       - name: taskId
+ *         in: path
+ *         required: true
+ *         description: Task document id
+ *         example: 1
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       description: Task information
+ *       content:
+ *         application/json:
+ *           schema:
+ *             required:
+ *               - description
+ *             properties:
+ *               description:
+ *                 type: string
+ *             example:
+ *               description: Create button
+ *     responses:
+ *       '204':
+ *         description: No Content
+ *       '500':
+ *         description: Internal Server Error
+ *       '404':
+ *         description: Not Found
+ */
+
+router.put('/employees/:id/tasks/:taskId', async(req, res) => {
+  try {
+      const taskRequest = {
+        description: req.body.description
+      };
+
+      const task = await Task.findOne({ taskId: req.params.taskId });
+
+      if (task) {
+        task.set({ description: taskRequest.description });
+        await task.save()
+          .then(() => {
+            res.status(204).send();
+          })
+          .catch(err => {
+            res.status(400).send();
+          });
+      }
+      else {
+        res.status(404).send({
+          'message': 'Not Found.'
+        });
+      }
+  } catch (e) {
+      console.log(e);
+      res.status(500).send({
+          'message': `Server Exception: ${e.message}`
+      });
+  }
+});
+
+/**
+ * deleteTask
+ * @openapi
+ * /api/employees/{id}/tasks/{taskId}:
+ *   delete:
+ *     tags:
+ *       - Employees
+ *     name: deleteTask
+ *     description: API for deleting a task document by id to MongoDB Atlas
+ *     summary: Deletes a task document
+ *     parameters: 
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: Employee document id
+ *         example: 1007
+ *         schema:
+ *           type: string
+ *       - name: taskId
+ *         in: path
+ *         required: true
+ *         description: Task document id
+ *         example: 1
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '204':
+ *         description: No Content
+ *       '404':
+ *         description: Not Found
+ *       '500':
+ *         description: Internal Server Error
+ */
+
+router.delete('/employees/:id/tasks/:taskId', async(req, res) => {
+  try {
+      await Task.findOneAndDelete({ taskId: req.params.taskId })
+        .then(() => {
+          res.status(204).send();
+        })
+        .catch(err => {
+          res.status(400).send();
+        });
+  } catch (e) {
+      console.log(e);
+      res.status(500).send({
+          'message': `Server Exception: ${e.message}`
+      });
+  }
 });
 
 module.exports = router;

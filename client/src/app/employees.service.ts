@@ -24,4 +24,12 @@ export class EmployeesService {
   createTaskByEmployeeId(id: string, task: Task): Observable<Task> {
     return this.http.post<Task>(`${this.apiUrl}/employees/${id}/tasks`, task);
   }
+
+  updateTaskByEmployeeId(id: string, task: Task): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/employees/${id}/tasks/${task.taskId}`, task);
+  }
+
+  deleteTaskByEmployeeId(id: string, taskId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/employees/${id}/tasks/${taskId}`);
+  }
 }

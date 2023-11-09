@@ -41,6 +41,8 @@ import { AppLayoutComponent } from './layouts/app-layout/app-layout.component';
 import { ExternalNavComponent } from './layouts/external-nav/external-nav.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { TaskDialogComponent } from './dialogs/task-dialog/task-dialog.component';
+import { TaskDeleteDialogComponent } from './dialogs/task-delete-dialog/task-delete-dialog.component';
+import { TaskUpdateDialogComponent } from './dialogs/task-update-dialog/task-update-dialog.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import { TaskDialogComponent } from './dialogs/task-dialog/task-dialog.component
     AppLayoutComponent,
     ExternalNavComponent,
     TasksComponent,
-    TaskDialogComponent
+    TaskDialogComponent,
+    TaskDeleteDialogComponent,
+    TaskUpdateDialogComponent
   ],
   imports: [
     BrowserModule,
