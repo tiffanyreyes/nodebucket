@@ -27,7 +27,8 @@ export class TaskDialogComponent implements OnInit {
     const employeeId = this.cookieService.get('empId');
     const formValues = this.createTaskForm.value;
     const task: Task = {
-      description: formValues.description
+      description: formValues.description,
+      status: 'todo'
     };
 
     this.employeesService.createTaskByEmployeeId(employeeId, task)

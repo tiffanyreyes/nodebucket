@@ -36,7 +36,8 @@ export class TasksComponent implements OnInit {
     this.employeeName = this.cookieService.get('fullName');
     this.employeesService.findTasksByEmployeeId(this.employeeId)
       .subscribe((res) => {
-        this.todo = res;
+        this.todo = res.filter(task => task.status === 'todo');
+        this.done = res.filter(task => task.status === 'completed');
 
         this.calculateProgress();
       });
@@ -46,12 +47,23 @@ export class TasksComponent implements OnInit {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
+      const task = event.previousContainer.data[event.previousIndex];
+
+      if (event.container.id === 'done-list') {
+        task.status = 'completed';
+      }
+      else {
+        task.status = 'todo';
+      }
+
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex,
       );
+
+      this.employeesService.updateTaskByEmployeeId(this.employeeId, task).subscribe();
     }
 
     this.calculateProgress();

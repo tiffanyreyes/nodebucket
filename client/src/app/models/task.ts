@@ -9,6 +9,7 @@
 
 export interface Task {
   description: string,
+  status: string,
   taskId?: number,
   employeeId?: string,
   priority?: number

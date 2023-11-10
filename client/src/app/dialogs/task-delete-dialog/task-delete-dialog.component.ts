@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CookieService } from 'ngx-cookie-service';
 import { EmployeesService } from 'src/app/employees.service';
@@ -10,20 +10,18 @@ import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
   styleUrls: ['./task-delete-dialog.component.css']
 })
 export class TaskDeleteDialogComponent {
-
+  constructor(
+    private employeesService: EmployeesService,
+    private cookieService: CookieService,
+    private dialogRef: MatDialogRef<TaskDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { taskId: number }) {}
 
   deleteTask() {
-    const data = inject(MAT_DIALOG_DATA);
-    const cookieService = inject(CookieService);
-    const employeesService = inject(EmployeesService);
-    const dialogRef = inject(MatDialogRef<TaskDeleteDialogComponent>);
-
-    const employeeId = cookieService.get('empId');
-    employeesService.deleteTaskByEmployeeId(employeeId, data.taskId)
+    const employeeId = this.cookieService.get('empId');
+    this.employeesService.deleteTaskByEmployeeId(employeeId, this.data.taskId)
       .subscribe(() => {
-        dialogRef.close(true);
+        this.dialogRef.close(true);
       });
-
   }
 
 }

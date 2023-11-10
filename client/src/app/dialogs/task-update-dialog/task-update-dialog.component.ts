@@ -32,7 +32,8 @@ export class TaskUpdateDialogComponent {
     const task: Task = {
       taskId: this.data.task.taskId,
       employeeId: this.data.task.employeeId,
-      description: formValues.description
+      description: formValues.description,
+      status: this.data.task.status
     };
 
     this.employeesService.updateTaskByEmployeeId(employeeId, task)
