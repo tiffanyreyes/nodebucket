@@ -26,6 +26,10 @@ const taskSchema = new Schema({
     },
     priority: {
       type: Number
+    },
+    status: {
+      type: String,
+      required: true
     }
  });
 

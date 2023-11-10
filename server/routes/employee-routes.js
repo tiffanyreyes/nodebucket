@@ -139,11 +139,15 @@ router.get('/employees/:id/tasks', async(req, res) => {
  *           schema:
  *             required:
  *               - description
+ *               - status
  *             properties:
  *               description:
  *                 type: string
+ *               status:
+ *                 type: string
  *             example:
  *               description: Create button
+ *               status: todo
  *     responses:
  *       '201':
  *         description: Task added
@@ -157,7 +161,8 @@ router.post('/employees/:id/tasks', async(req, res) => {
     try {
         const task = {
             description: req.body.description,
-            employeeId: req.params.id
+            employeeId: req.params.id,
+            status: req.body.status
         }
         await Counter.findOneAndUpdate(
             {counterName: 'taskCounter'},
@@ -218,11 +223,15 @@ router.post('/employees/:id/tasks', async(req, res) => {
  *           schema:
  *             required:
  *               - description
+ *               - status
  *             properties:
  *               description:
  *                 type: string
+ *               status:
+ *                 type: string
  *             example:
  *               description: Create button
+ *               status: todo
  *     responses:
  *       '204':
  *         description: No Content
@@ -235,13 +244,14 @@ router.post('/employees/:id/tasks', async(req, res) => {
 router.put('/employees/:id/tasks/:taskId', async(req, res) => {
   try {
       const taskRequest = {
-        description: req.body.description
+        description: req.body.description,
+        status: req.body.status
       };
 
       const task = await Task.findOne({ taskId: req.params.taskId });
 
       if (task) {
-        task.set({ description: taskRequest.description });
+        task.set({ description: taskRequest.description, status: taskRequest.status });
         await task.save()
           .then(() => {
             res.status(204).send();

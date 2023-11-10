@@ -69,11 +69,15 @@ router.get('/tasks', async(req, res) => {
  *           schema:
  *             required:
  *               - description
+ *               - status
  *             properties:
  *               description:
  *                 type: string
+ *               status:
+ *                 type: string
  *             example:
  *               description: Create button
+ *               status: todo
  *     responses:
  *       '200':
  *         description: Task added
@@ -86,27 +90,29 @@ router.get('/tasks', async(req, res) => {
 router.post('/tasks', async(req, res) => {
     try {
         const task = {
-            description: req.body.description
+            description: req.body.description,
+            status: req.body.status
         }
+
         await Counter.findOneAndUpdate(
             {counterName: 'taskCounter'},
             {'$inc': {'value':1}},
             {new: true}
         )
-        .then(async(counter) => {
-            task.taskId = counter.value
-            await Task.create(task)
-            .then((task) => {
-                console.log(task);
-                res.json(task);
+            .then(async(counter) => {
+                task.taskId = counter.value
+                await Task.create(task)
+                    .then((task) => {
+                        console.log(task);
+                        res.json(task);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        res.status(500).send({
+                            'message': `Internal Server Error: ${err}`
+                        });
+                    });
             })
-            .catch((err) => {
-                console.log(err);
-                res.status(500).send({
-                    'message': `Internal Server Error: ${err}`
-                });
-            });
-        })
     } catch (e) {
         console.log(e);
         res.status(500).send({
