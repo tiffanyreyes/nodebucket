@@ -1,3 +1,10 @@
+/**
+ * Title: tasks.component.ts
+ * Author: Tiffany Reyes
+ * Date: 10 Nov 2023
+ */
+
+// imports statements
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { EmployeesService } from '../employees.service';
@@ -43,7 +50,7 @@ export class TasksComponent implements OnInit {
       });
   }
 
-  drop(event: CdkDragDrop<Task[]>) {
+  drop(event: CdkDragDrop<Task[]>) { // drag and drop list logic
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -81,7 +88,7 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  calculateProgress() {
+  calculateProgress() { // progress bar logic
     if(this.todo.length + this.done.length === 0) {
       return;
     }
@@ -89,7 +96,7 @@ export class TasksComponent implements OnInit {
     this.progress = (this.done.length/(this.todo.length + this.done.length)) * 100;
   }
 
-  deleteTask(taskId: number) {
+  deleteTask(taskId: number) { // deleting task
     this.deleteDialogRef = this.dialog.open(TaskDeleteDialogComponent, {
       data: { taskId },
       width: '500px'
@@ -102,7 +109,7 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  updateTask(task: Task) {
+  updateTask(task: Task) { // updating task
     this.updateDialogRef = this.dialog.open(TaskUpdateDialogComponent, {
       data: { task },
       width: '500px'

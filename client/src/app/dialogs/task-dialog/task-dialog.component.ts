@@ -1,3 +1,11 @@
+/**
+ * Title: task-dialog.component.ts
+ * Author: Tiffany Reyes
+ * Date: 10 Nov 2023
+ * Description: task-dialog component
+ */
+
+// importing class elements
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';

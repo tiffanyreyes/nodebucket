@@ -1,6 +1,6 @@
 /**
  * Title: nav.component.ts
- * Author: Professor Krasso
+ * Author: Tiffany Reyes
  * Date: 8/5/23
  */
 

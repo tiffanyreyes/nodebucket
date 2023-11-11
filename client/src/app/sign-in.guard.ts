@@ -1,3 +1,11 @@
+/**
+ * Title: sign-in.guard.ts
+ * Author: Tiffany Reyes
+ * Date: 10 Nov 2023
+ * Description: sign-in guard
+ */
+
+// exporting book class elements
 import { CanActivateFn } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';

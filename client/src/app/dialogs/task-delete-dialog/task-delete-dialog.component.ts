@@ -1,3 +1,11 @@
+/**
+ * Title: task-delete-dialog.component.ts
+ * Author: Tiffany Reyes
+ * Date: 10 Nov 2023
+ * Description: task-delete-dialog component
+ */
+
+// importing class elements
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CookieService } from 'ngx-cookie-service';

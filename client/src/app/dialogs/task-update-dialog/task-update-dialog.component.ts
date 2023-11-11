@@ -1,3 +1,11 @@
+/**
+ * Title: task-update-dialog.component.ts
+ * Author: Tiffany Reyes
+ * Date: 10 Nov 2023
+ * Description: task-update-dialog component
+ */
+
+// importing class elements
 import { Component, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';

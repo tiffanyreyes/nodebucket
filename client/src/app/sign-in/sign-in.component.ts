@@ -1,3 +1,11 @@
+/**
+ * Title: sign-in.component.ts
+ * Author: Tiffany Reyes
+ * Date: 10 Nov 2023
+ * Description: sign-in component
+ */
+
+// exporting book class elements
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,7 +24,7 @@ export class SignInComponent implements OnInit {
 
   constructor(private router: Router, private fb: FormBuilder, private employeesService: EmployeesService, private cookieService: CookieService) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void { // validation for sign-in
     this.signInForm = this.fb.group({employeeId: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]*$')])]});
   }
 

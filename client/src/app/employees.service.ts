@@ -1,3 +1,12 @@
+/**
+ * Title: employee.service.ts
+ * Author: Tiffany Reyes
+ * Date: 10 Nov 2023
+ * Description: employee service
+ */
+
+// exporting book class elements
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';

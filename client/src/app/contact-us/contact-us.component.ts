@@ -1,3 +1,11 @@
+/**
+ * Title: contact-us.component.ts
+ * Author: Tiffany Reyes
+ * Date: 10 Nov 2023
+ * Description: contact-us component
+ */
+
+// importing class elements
 import { Component } from '@angular/core';
 
 @Component({
