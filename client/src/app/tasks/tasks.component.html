@@ -6,7 +6,7 @@
     </div>
     <div class="row">
       <div class="col text-center">
-        <h2>My Progress: {{ progress }}%</h2>
+        <h2>My Progress: {{ progress | number : '1.2-2' }}%</h2>
         <mat-progress-bar mode="determinate" color="accent" class="mt-4 mb-4" [value]="progress"></mat-progress-bar>
       </div>
     </div>
