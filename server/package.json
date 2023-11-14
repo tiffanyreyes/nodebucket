@@ -17,5 +17,9 @@
     "nodemon": "^2.0.22"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "engines": {
+    "node": "18.12.1",
+    "npm": "8.19.2"
+  }
 }
