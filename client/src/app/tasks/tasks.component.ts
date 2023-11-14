@@ -84,6 +84,7 @@ export class TasksComponent implements OnInit {
     this.createDialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.todo.push(result);
+        this.calculateProgress();
       }
     });
   }
